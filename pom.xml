@@ -35,7 +35,6 @@
         <module>poom-l10n-api</module>
         <module>poom-l10n-formatter-json</module>
         <module>poom-l10n-formatter-spec</module>
-
     </modules>
 
     <repositories>
