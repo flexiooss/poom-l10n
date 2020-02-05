@@ -1,0 +1,9 @@
+TestCaseExpectedValue:
+  value: string
+  exception: bool
+
+TestCaseFormatter:
+  name: string
+#  ingredient:
+#  values:
+  expectedValue: $TestCaseExpectedValue

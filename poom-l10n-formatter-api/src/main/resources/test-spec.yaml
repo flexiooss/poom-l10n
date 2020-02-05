@@ -1,0 +1,12 @@
+TestCaseExpectedValue:
+  value: string
+  exception: bool
+
+TestCaseInterpreter:
+  name: string
+  values: TestCaseValue[]
+  expectedValue: $TestCaseExpectedValue
+
+TestCaseValue:
+  key: string
+  value: object
