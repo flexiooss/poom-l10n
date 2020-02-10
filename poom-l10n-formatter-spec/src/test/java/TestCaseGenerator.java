@@ -10,19 +10,28 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class TestCaseGenerator {
     public static void main(String[] args) throws IOException {
         TestCaseFormatter test = TestCaseFormatter.builder()
-                .name("Test_givenFormatInt__giveInt__thenGetInt")
+                .name("Test_givenFormatInt__giveDate__thenGetDate")
                 .template("{a:d}")
                 .locale("FR")
                 .offset("0")
                 .values(
-                        TestCaseValue.builder().key("a").value(ObjectValue.builder().property("value", v -> v.longValue(42L)).build()).build()
+//                        TestCaseValue.builder().key("a").value(ObjectValue.builder().property("value", v -> v.doubleValue(5d)).build()).build()
+//                        TestCaseValue.builder().key("a").value(ObjectValue.builder().property("value", v -> v.longValue(42L)).build()).build()
+                        TestCaseValue.builder().key("a").value(ObjectValue.builder().property("value", v -> v.datetimeValue(LocalDateTime.now())).build()).build()
+//                        TestCaseValue.builder().key("a").value(ObjectValue.builder().property("value", v -> v.dateValue(LocalDate.now())).build()).build()
+//                        TestCaseValue.builder().key("a").value(ObjectValue.builder().property("value", v -> v.timeValue(LocalTime.now())).build()).build()
+//                        TestCaseValue.builder().key("a").value(ObjectValue.builder().property("value", v -> v.stringValue("plok")).build()).build()
                 )
                 .expectedValue(
-                        TestCaseExpectedValue.builder().value("42").exception(false).build()
+//                        TestCaseExpectedValue.builder().value("5").exception(false).build()
+                        TestCaseExpectedValue.builder().exception(true).build()
                 )
                 .build();
 
