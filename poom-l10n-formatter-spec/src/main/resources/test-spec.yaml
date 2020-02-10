@@ -4,6 +4,14 @@ TestCaseExpectedValue:
 
 TestCaseFormatter:
   name: string
-#  ingredient:
-#  values:
+  key: string
+  locale: string
+  zone: string
+  values:
+    $list: $TestCaseValue
   expectedValue: $TestCaseExpectedValue
+
+TestCaseValue:
+  key: string
+  value:
+    $value-object: org.codingmatters.value.objects.values.ObjectValue

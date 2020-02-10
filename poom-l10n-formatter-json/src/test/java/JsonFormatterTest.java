@@ -41,7 +41,7 @@ public class JsonFormatterTest {
     public void givenFormatString__giveString__thenGetString() throws Exception {
         String s = "{a:s}";
         JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of(ZoneOffset.UTC.getId()));
-        this.values.put("a", "plok");
+        this.values.put("", "plok");
         assertThat(formatter.format(values), is("plok"));
     }
 
