@@ -4,9 +4,9 @@ TestCaseExpectedValue:
 
 TestCaseFormatter:
   name: string
-  key: string
+  template: string
   locale: string
-  zone: string
+  offset: string
   values:
     $list: $TestCaseValue
   expectedValue: $TestCaseExpectedValue

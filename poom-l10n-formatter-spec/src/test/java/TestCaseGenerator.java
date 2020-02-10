@@ -14,14 +14,15 @@ import java.io.OutputStream;
 public class TestCaseGenerator {
     public static void main(String[] args) throws IOException {
         TestCaseFormatter test = TestCaseFormatter.builder()
-                .name("givenFormatString__giveString__thenGetString")
+                .name("Test_givenFormatInt__giveInt__thenGetInt")
+                .template("{a:d}")
                 .locale("FR")
-                .zone("UTC")
+                .offset("0")
                 .values(
-                        TestCaseValue.builder().key("a").value(ObjectValue.builder().property("value", v -> v.stringValue("plok")).build()).build()
+                        TestCaseValue.builder().key("a").value(ObjectValue.builder().property("value", v -> v.longValue(42L)).build()).build()
                 )
                 .expectedValue(
-                        TestCaseExpectedValue.builder().value("plok").exception(false).build()
+                        TestCaseExpectedValue.builder().value("42").exception(false).build()
                 )
                 .build();
 
@@ -29,12 +30,8 @@ public class TestCaseGenerator {
         try (OutputStream stream = new FileOutputStream(new File(test.name() + ".json"))) {
             try (JsonGenerator generator = new JsonFactory().createGenerator(stream)) {
                 writer.write(generator, test);
-                System.out.println("write "+test.name());
-            } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("write " + test.name());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
