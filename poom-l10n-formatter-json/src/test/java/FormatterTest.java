@@ -32,7 +32,7 @@ public class FormatterTest {
                 .with("msgs", 15000)
                 .at(Locale.FRANCE, ZoneOffset.of(ZoneOffset.UTC.getId()));
 
-        assertThat(format, is("Bonjour Toto, nous sommes le 29 oct. 2020 à 12:30:15 (29 oct. 2020 à 12:30:15:30:0) vous etes venus 16 fois pendant 1,5 minutes. Vous avez 15 000 messages !"));
+        assertThat(format, is("Bonjour Toto, nous sommes le 29 oct. 2020 à 12:30:15 (29 oct. 2020 12:30:15:30:0) vous etes venus 16 fois pendant 1,5 minutes. Vous avez 15 000 messages !"));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class FormatterTest {
                 .with("msgs", 15000)
                 .at(Locale.UK, ZoneOffset.of(ZoneOffset.UTC.getId()));
 
-        assertThat(format, is("Hello Toto, we are on 29 Oct 2020 at 12:30:15 (29 Oct 2020, 12:30:15:30:0) you have come 16 times for 1.5 minutes. You have 15,000 messages!"));
+        assertThat(format, is("Hello Toto, we are on 29-Oct-2020 at 12:30:15 (29-Oct-2020 12:30:15:30:0) you have come 16 times for 1.5 minutes. You have 15,000 messages!"));
     }
 
     @Test
@@ -62,7 +62,6 @@ public class FormatterTest {
                 .with("msgs", 15000)
                 .at(Locale.US, ZoneOffset.of(ZoneOffset.UTC.getId()));
 
-        assertThat(format, is("Hello Toto, we are on Oct 29, 2020 at 12:30:15 PM (Oct 29, 2020, 12:30:15 PM:30:0) you have come 16 times for 1.5 minutes. You have 15,000 messages!"));
+        assertThat(format, is("Hello Toto, we are on Oct 29, 2020 at 12:30:15 PM (Oct 29, 2020 12:30:15 PM:30:0) you have come 16 times for 1.5 minutes. You have 15,000 messages!"));
     }
-
 }
