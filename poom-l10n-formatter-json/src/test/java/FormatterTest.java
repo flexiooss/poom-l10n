@@ -15,7 +15,8 @@ public class FormatterTest {
     @Test
     public void testComplete() throws Exception {
         LocalDateTime localDateTime = LocalDateTime.of(LocalDate.of(2020, 10, 29), LocalTime.of(12, 30, 15));
-        String format = Formatter.format("base")
+
+        String format = Formatter.format(null,"base")
                 .with("user", "Toto")
                 .with("count", 16)
                 .with("date", localDateTime)

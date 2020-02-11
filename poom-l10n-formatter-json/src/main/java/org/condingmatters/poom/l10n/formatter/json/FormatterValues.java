@@ -6,16 +6,21 @@ import java.util.Locale;
 import java.util.Map;
 
 public class FormatterValues {
-    private JsonFormatterClient client = new JsonFormatterClient();
+    private JsonFormatterClient client;
     private Locale locale;
     private ZoneOffset offset;
 
     private String id;
     private Map<String, Object> values;
 
-    public FormatterValues(String id) {
-        this.id = id;
+    public FormatterValues(JsonFormatterClient client) {
         this.values = new HashMap<>();
+        this.client = client;
+    }
+
+    public FormatterValues key(String key) {
+        this.id = key;
+        return this;
     }
 
     public FormatterValues with(String key, Object value) throws FormatterException {
