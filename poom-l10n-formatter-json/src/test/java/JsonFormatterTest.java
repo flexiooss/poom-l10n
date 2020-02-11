@@ -160,23 +160,22 @@ public class JsonFormatterTest {
     }
 
     @Test
-    @Ignore
     public void givenFormatDateTime__giveDateTime__thenGetError() throws Exception {
         String s = "{a:t}";
         JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of(ZoneOffset.UTC.getId()));
         this.values.put("a", dateTime);
-        assertThat(formatter.format(values), is("29/10/2020 12:30:15:200"));
+        assertThat(formatter.format(values), is("29 oct. 2020 à 12:30:15:30:200"));
 
         formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of("+02:00"));
         this.values.put("a", dateTime);
-        assertThat(formatter.format(values), is("29/10/2020 14:30:15:200"));
+        assertThat(formatter.format(values), is("29 oct. 2020 à 14:30:15:30:200"));
 
         formatter = new JsonFormatter(s, Locale.UK, ZoneOffset.of(ZoneOffset.UTC.getId()));
         this.values.put("a", dateTime);
-        assertThat(formatter.format(values), is("10/20/2020 12:30:15:200"));
+        assertThat(formatter.format(values), is("29 Oct 2020, 12:30:15:30:200"));
 
         formatter = new JsonFormatter(s, Locale.UK, ZoneOffset.of("+02:00"));
         this.values.put("a", dateTime);
-        assertThat(formatter.format(values), is("10/29/2020 2:30:15:200"));
+        assertThat(formatter.format(values), is("29 Oct 2020, 14:30:15:30:200"));
     }
 }
