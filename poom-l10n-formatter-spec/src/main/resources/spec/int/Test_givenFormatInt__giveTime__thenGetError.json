@@ -1,7 +1,7 @@
 {
   "name": "Test_givenFormatInt__giveTime__thenGetError",
   "template": "{a:d}",
-  "locale": "FR",
+  "locale": "fr",
   "offset": "0",
   "values": [
     {

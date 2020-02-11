@@ -1,7 +1,7 @@
 {
   "name": "Test_givenFormatInt__giveInt__thenGetInt",
   "template": "{a:d}",
-  "locale": "FR",
+  "locale": "fr",
   "offset": "0",
   "values": [
     {

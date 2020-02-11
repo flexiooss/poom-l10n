@@ -1,13 +1,13 @@
 {
-  "name": "Test_givenFormatFloat__giveDateTime__thenGetError",
-  "template": "{a:d}",
+  "name": "Test_givenFormatDate__giveFloat__thenGetError",
+  "template": "{a:td}",
   "locale": "fr",
   "offset": "0",
   "values": [
     {
       "key": "a",
       "value": {
-        "value": "2020-02-10T16:57:36.079"
+        "value": 5.0
       }
     }
   ],

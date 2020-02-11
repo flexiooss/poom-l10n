@@ -1,7 +1,7 @@
 {
   "name": "Test_givenFormatFloat__giveFloat__thenGetFloat",
   "template": "{a:d}",
-  "locale": "FR",
+  "locale": "fr",
   "offset": "0",
   "values": [
     {

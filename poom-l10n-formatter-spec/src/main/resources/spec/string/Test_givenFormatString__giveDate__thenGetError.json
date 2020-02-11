@@ -1,7 +1,7 @@
 {
   "name": "Test_givenFormatString__giveDate__thenGetError",
   "template": "{a:s}",
-  "locale": "FR",
+  "locale": "fr",
   "offset": "0",
   "values": [
     {
