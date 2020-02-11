@@ -11,7 +11,6 @@
     </parent>
 
     <artifactId>poom-l10n-formatter-json</artifactId>
-    <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
 
@@ -19,6 +18,14 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codingmatters.poom</groupId>
+            <artifactId>poom-l10n-formatter-spec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
     </dependencies>
 </project>

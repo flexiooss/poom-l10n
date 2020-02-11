@@ -1,5 +1,7 @@
 package org.condingmatters.poom.l10n.formatter.json;
 
+import javax.swing.text.NumberFormatter;
+import java.text.NumberFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -28,7 +30,6 @@ public class JsonFormatter {
         final Matcher matcher = pattern.matcher(this.sentence);
         String formattedSentence = this.sentence;
         while (matcher.find()) {
-            System.out.println("Full match: " + matcher.group(0));
             formattedSentence = this.replace(formattedSentence, matcher.group(0));
         }
         return formattedSentence;
@@ -77,28 +78,29 @@ public class JsonFormatter {
     private String formatValue(Object value, String format) throws FormatterException {
         switch (format) {
             case "s":
+                return value.toString();
             case "f":
             case "d":
-                return value.toString();
+                return NumberFormat.getInstance(this.locale).format(value);
             case "t":
                 LocalDateTime dateTime = (LocalDateTime) value;
                 Instant instant = dateTime.toInstant(ZoneOffset.UTC);
                 OffsetDateTime offsetDateTime = instant.atOffset(this.offset);
                 String end = ":" + offsetDateTime.getMinute() + ":" + (offsetDateTime.getNano() / 1000000);
                 return DateTimeFormatter
-                        .ofLocalizedDateTime(FormatStyle.SHORT)
+                        .ofLocalizedDateTime(FormatStyle.MEDIUM)
                         .withLocale(this.locale)
                         .withZone(ZoneId.ofOffset("UTC", this.offset))
                         .format(offsetDateTime) + end;
             case "tt":
                 return DateTimeFormatter
-                        .ofLocalizedTime(FormatStyle.SHORT)
+                        .ofLocalizedTime(FormatStyle.MEDIUM)
                         .withLocale(this.locale)
                         .withZone(ZoneId.ofOffset("", this.offset))
                         .format(((LocalDateTime) value).atZone(ZoneId.ofOffset("UTC", this.offset)));
             case "td":
                 return DateTimeFormatter
-                        .ofLocalizedDate(FormatStyle.SHORT)
+                        .ofLocalizedDate(FormatStyle.MEDIUM)
                         .withLocale(this.locale)
                         .withZone(ZoneId.ofOffset("", this.offset))
                         .format(((LocalDateTime) value).atOffset(this.offset));

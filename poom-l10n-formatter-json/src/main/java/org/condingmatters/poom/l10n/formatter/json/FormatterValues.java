@@ -31,10 +31,11 @@ public class FormatterValues {
         return this;
     }
 
-    public String at(Locale locate, ZoneOffset offset) throws FormatterException {
+    public String at(Locale locale, ZoneOffset offset) throws FormatterException {
         this.locale = locale;
         this.offset = offset;
-        String sentence = this.client.get(this.id);
-        return new JsonFormatter(sentence, locale, offset).format(values);
+
+        String sentence = this.client.get(this.locale.toLanguageTag(), this.id);
+        return new JsonFormatter(sentence, this.locale, this.offset).format(values);
     }
 }
