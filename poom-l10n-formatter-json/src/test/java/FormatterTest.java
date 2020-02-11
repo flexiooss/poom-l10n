@@ -17,7 +17,7 @@ public class FormatterTest {
 
     @Before
     public void setUp() throws Exception {
-        this.client = new JsonFormatterClient("Localizations.json");
+        this.client = new JsonFormatterClient("spec/Localizations.json");
     }
 
     @Test
