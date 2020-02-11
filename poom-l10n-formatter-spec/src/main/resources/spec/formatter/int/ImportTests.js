@@ -1,6 +1,6 @@
 const test1 = require('./Test_givenFormatInt__giveDate__thenGetError')
 const test2 = require('./Test_givenFormatInt__giveDateTime__thenGetError')
-const test3 = require('./Test_givenFormatInt__giveInt__thenGetInt')
+const test3 = require('./Test_givenFormatInt__giveFloat__thenGetError')
 const test4 = require('./Test_givenFormatInt__giveInt__thenGetInt')
 const test5 = require('./Test_givenFormatInt__giveString__thenGetError')
 const test6 = require('./Test_givenFormatInt__giveTime__thenGetError')
