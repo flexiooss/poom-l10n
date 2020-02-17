@@ -15,12 +15,12 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class JsonFormatterDateTimeTest {
+public class JsonFormatterTimeTest {
     private Map<String, Object> values = new HashMap<>();
-    private LocalTime time = LocalTime.of(12, 30, 15, 200 * 1000000);
+    private LocalTime time = LocalTime.of(12,30,15,200 * 1000000);
     private LocalDate date = LocalDate.of(2020, 10, 29);
     private LocalDateTime dateTime = LocalDateTime.of(date, time);
-    private String s = "{a:t}";
+    private String s = "{a:tt}";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -52,27 +52,31 @@ public class JsonFormatterDateTimeTest {
     @Test
     public void givenFormatDateTime__giveDateTime__thenGetError() throws Exception {
         JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
+        this.values.put("a", time);
+        assertThat(formatter.format(values), is("12:30:15"));
+
+        formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of("+00:00"));
         this.values.put("a", dateTime);
-        assertThat(formatter.format(values), is("29/10/2020 12:30:15"));
+        assertThat(formatter.format(values), is("12:30:15"));
 
         formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of("+02:00"));
         this.values.put("a", dateTime);
-        assertThat(formatter.format(values), is("29/10/2020 14:30:15"));
+        assertThat(formatter.format(values), is("14:30:15"));
 
         formatter = new JsonFormatter(s, Locale.UK, ZoneOffset.UTC);
         this.values.put("a", dateTime);
-        assertThat(formatter.format(values), is("29/10/2020, 12:30:15"));
+        assertThat(formatter.format(values), is("12:30:15"));
 
         formatter = new JsonFormatter(s, Locale.UK, ZoneOffset.of("+02:00"));
         this.values.put("a", dateTime);
-        assertThat(formatter.format(values), is("29/10/2020, 14:30:15"));
+        assertThat(formatter.format(values), is("14:30:15"));
 
         formatter = new JsonFormatter(s, Locale.US, ZoneOffset.UTC);
         this.values.put("a", dateTime);
-        assertThat(formatter.format(values), is("10/29/20, 12:30:15 PM"));
+        assertThat(formatter.format(values), is("12:30:15 PM"));
 
         formatter = new JsonFormatter(s, Locale.US, ZoneOffset.of("+02:00"));
         this.values.put("a", dateTime);
-        assertThat(formatter.format(values), is("10/29/20, 2:30:15 PM"));
+        assertThat(formatter.format(values), is("2:30:15 PM"));
     }
 }

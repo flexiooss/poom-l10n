@@ -111,16 +111,20 @@ public class JsonFormatter {
         if (value instanceof LocalDate) {
             return timeFormatter.format((LocalDate) value);
         }
-        OffsetDateTime offsetDateTime = this.offsetDateTime((LocalDateTime) value);
-        return timeFormatter.format(offsetDateTime);
+
+        return timeFormatter.format(this.offsetDateTime((LocalDateTime) value));
     }
 
     private String getTime(Object value) {
-        OffsetDateTime offsetDateTime = this.offsetDateTime((LocalDateTime) value);
         DateTimeFormatter timeFormatter = new DateTimeFormatterBuilder()
                 .appendLocalized(null, FormatStyle.MEDIUM)
                 .toFormatter(locale);
-        return timeFormatter.format(offsetDateTime);
+
+        if (value instanceof LocalTime){
+         return timeFormatter.format((LocalTime)value);
+        }
+
+        return timeFormatter.format(this.offsetDateTime((LocalDateTime) value));
     }
 
     private OffsetDateTime offsetDateTime(LocalDateTime dateTime) {

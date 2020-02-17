@@ -13,11 +13,12 @@ import static org.hamcrest.Matchers.is;
 
 public class JsonFormatterDateTest {
     private Map<String, Object> values = new HashMap<>();
+    private String s = "{date:td}";
 
     @Test
     public void testDate() throws Exception {
         values.put("date", LocalDate.of(2020, 10, 29));
-        String format = new JsonFormatter("{date:td}", Locale.FRANCE, ZoneOffset.UTC)
+        String format = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC)
                 .format(values);
         assertThat(format, is("29/10/2020"));
 
@@ -29,11 +30,11 @@ public class JsonFormatterDateTest {
     @Test
     public void testDateFromDateTime() throws Exception {
         values.put("date", LocalDateTime.of(2020, 10, 29, 0, 0, 0));
-        String format = new JsonFormatter("{date:td}", Locale.FRANCE, ZoneOffset.ofHours(-1))
+        String format = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.ofHours(-1))
                 .format(values);
         assertThat(format, is("28/10/2020"));
 
-        format = new JsonFormatter("{date:td}", Locale.FRANCE, ZoneOffset.ofHours(1))
+        format = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.ofHours(1))
                 .format(values);
         assertThat(format, is("29/10/2020"));
     }

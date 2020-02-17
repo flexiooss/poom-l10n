@@ -26,7 +26,7 @@ public class JsonFormatterIntTest {
     @Test
     public void givenFormatInt__giveString__thenGetError() throws Exception {
         String s = "{a:d}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of(ZoneOffset.UTC.getId()));
+        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", "plok");
         thrown.expect(FormatterException.class);
         formatter.format(values);
@@ -35,7 +35,7 @@ public class JsonFormatterIntTest {
     @Test
     public void givenFormatInt__giveInt__thenGetInt() throws Exception {
         String s = "{a:d}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of(ZoneOffset.UTC.getId()));
+        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", 1000);
         assertThat(formatter.format(values), is("1\u202f000"));
     }
@@ -43,7 +43,7 @@ public class JsonFormatterIntTest {
     @Test
     public void givenFormatInt__giveFloat__thenGetError() throws Exception {
         String s = "{a:d}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of(ZoneOffset.UTC.getId()));
+        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", 15.5);
         thrown.expect(FormatterException.class);
         formatter.format(values);
@@ -52,7 +52,7 @@ public class JsonFormatterIntTest {
     @Test
     public void givenFormatInt__giveDateTime__thenGetError() throws Exception {
         String s = "{a:d}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of(ZoneOffset.UTC.getId()));
+        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", dateTime);
         thrown.expect(FormatterException.class);
         formatter.format(values);
@@ -61,7 +61,7 @@ public class JsonFormatterIntTest {
     @Test
     public void givenFormatInt__giveDate__thenGetError() throws Exception {
         String s = "{a:d}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of(ZoneOffset.UTC.getId()));
+        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", date);
         thrown.expect(FormatterException.class);
         formatter.format(values);
@@ -70,7 +70,7 @@ public class JsonFormatterIntTest {
     @Test
     public void givenFormatInt__giveTime__thenGetError() throws Exception {
         String s = "{a:d}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.of(ZoneOffset.UTC.getId()));
+        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", time);
         thrown.expect(FormatterException.class);
         formatter.format(values);
