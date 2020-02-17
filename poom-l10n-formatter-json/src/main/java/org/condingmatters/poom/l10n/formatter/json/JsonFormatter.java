@@ -1,6 +1,5 @@
 package org.condingmatters.poom.l10n.formatter.json;
 
-import javax.swing.text.NumberFormatter;
 import java.text.NumberFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -77,6 +76,7 @@ public class JsonFormatter {
     }
 
     private String formatValue(Object value, String format) throws FormatterException {
+        OffsetDateTime offsetDateTime;
         switch (format) {
             case "s":
                 return value.toString();
@@ -84,29 +84,47 @@ public class JsonFormatter {
             case "d":
                 return NumberFormat.getInstance(this.locale).format(value);
             case "t":
-                LocalDateTime dateTime = (LocalDateTime) value;
-                Instant instant = dateTime.toInstant(ZoneOffset.UTC);
-                OffsetDateTime offsetDateTime = instant.atOffset(this.offset);
-                String end = ":" + offsetDateTime.getMinute() + ":" + (offsetDateTime.getNano() / 1000000);
-                return DateTimeFormatter
-                        .ofLocalizedDateTime(FormatStyle.MEDIUM)
-                        .withLocale(this.locale)
-                        .withZone(ZoneId.ofOffset("UTC", this.offset))
-                        .format(offsetDateTime) + end;
+                return this.getDateTime(value);
             case "tt":
-                return DateTimeFormatter
-                        .ofLocalizedTime(FormatStyle.MEDIUM)
-                        .withLocale(this.locale)
-                        .withZone(ZoneId.ofOffset("", this.offset))
-                        .format(((LocalDateTime) value).atZone(ZoneId.ofOffset("UTC", this.offset)));
+                return this.getTime(value);
             case "td":
-                return DateTimeFormatter
-                        .ofLocalizedDate(FormatStyle.MEDIUM)
-                        .withLocale(this.locale)
-                        .withZone(ZoneId.ofOffset("", this.offset))
-                        .format(((LocalDateTime) value).atOffset(this.offset));
+                return this.getDate(value);
             default:
                 throw new FormatterException("Unknown format : " + format);
         }
+    }
+
+    private String getDateTime(Object value) {
+        OffsetDateTime offsetDateTime = this.offsetDateTime((LocalDateTime) value);
+        DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
+                .appendLocalized(FormatStyle.SHORT, FormatStyle.MEDIUM)
+//                        .appendFraction(ChronoField.MILLI_OF_SECOND, 3, 3, true)
+                .toFormatter(locale);
+        return dateTimeFormatter.format(offsetDateTime);
+    }
+
+    private String getDate(Object value) {
+        DateTimeFormatter timeFormatter = new DateTimeFormatterBuilder()
+                .appendLocalized(FormatStyle.SHORT, null)
+                .toFormatter(locale);
+
+        if (value instanceof LocalDate) {
+            return timeFormatter.format((LocalDate) value);
+        }
+        OffsetDateTime offsetDateTime = this.offsetDateTime((LocalDateTime) value);
+        return timeFormatter.format(offsetDateTime);
+    }
+
+    private String getTime(Object value) {
+        OffsetDateTime offsetDateTime = this.offsetDateTime((LocalDateTime) value);
+        DateTimeFormatter timeFormatter = new DateTimeFormatterBuilder()
+                .appendLocalized(null, FormatStyle.MEDIUM)
+                .toFormatter(locale);
+        return timeFormatter.format(offsetDateTime);
+    }
+
+    private OffsetDateTime offsetDateTime(LocalDateTime dateTime) {
+        Instant instant = dateTime.toInstant(ZoneOffset.UTC);
+        return instant.atOffset(this.offset);
     }
 }

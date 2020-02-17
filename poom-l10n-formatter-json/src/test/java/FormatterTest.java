@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.is;
 
 public class FormatterTest {
     private JsonFormatterClient client;
+    private LocalDateTime localDateTime = LocalDateTime.of(LocalDate.of(2020, 10, 29), LocalTime.of(12, 30, 15, 254 * 1000000));
 
     @Before
     public void setUp() throws Exception {
@@ -22,8 +23,6 @@ public class FormatterTest {
 
     @Test
     public void testCompleteFR() throws Exception {
-        LocalDateTime localDateTime = LocalDateTime.of(LocalDate.of(2020, 10, 29), LocalTime.of(12, 30, 15));
-
         String format = Formatter.format(this.client, "r1")
                 .with("user", "Toto")
                 .with("count", 16)
@@ -32,7 +31,7 @@ public class FormatterTest {
                 .with("msgs", 15000)
                 .at(Locale.FRANCE, ZoneOffset.of(ZoneOffset.UTC.getId()));
 
-        assertThat(format, is("Bonjour Toto, nous sommes le 29 oct. 2020 à 12:30:15 (29 oct. 2020 12:30:15:30:0) vous etes venus 16 fois pendant 1,5 minutes. Vous avez 15 000 messages !"));
+        assertThat(format, is("Bonjour Toto, nous sommes le 29/10/2020 à 12:30:15 (29/10/2020 12:30:15) vous etes venus 16 fois pendant 1,5 minutes. Vous avez 15 000 messages !"));
     }
 
     @Test
@@ -47,7 +46,7 @@ public class FormatterTest {
                 .with("msgs", 15000)
                 .at(Locale.UK, ZoneOffset.of(ZoneOffset.UTC.getId()));
 
-        assertThat(format, is("Hello Toto, we are on 29-Oct-2020 at 12:30:15 (29-Oct-2020 12:30:15:30:0) you have come 16 times for 1.5 minutes. You have 15,000 messages!"));
+        assertThat(format, is("Hello Toto, we are on 29/10/2020 at 12:30:15 (29/10/2020, 12:30:15) you have come 16 times for 1.5 minutes. You have 15,000 messages!"));
     }
 
     @Test
@@ -62,6 +61,6 @@ public class FormatterTest {
                 .with("msgs", 15000)
                 .at(Locale.US, ZoneOffset.of(ZoneOffset.UTC.getId()));
 
-        assertThat(format, is("Hello Toto, we are on Oct 29, 2020 at 12:30:15 PM (Oct 29, 2020 12:30:15 PM:30:0) you have come 16 times for 1.5 minutes. You have 15,000 messages!"));
+        assertThat(format, is("Hello Toto, we are on 10/29/20 at 12:30:15 PM (10/29/20, 12:30:15 PM) you have come 16 times for 1.5 minutes. You have 15,000 messages!"));
     }
 }
