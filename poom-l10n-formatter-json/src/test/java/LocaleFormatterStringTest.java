@@ -1,6 +1,5 @@
 import org.condingmatters.poom.l10n.formatter.json.FormatterException;
-import org.condingmatters.poom.l10n.formatter.json.JsonFormatter;
-import org.junit.Ignore;
+import org.condingmatters.poom.l10n.formatter.json.LocaleFormatter;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,7 +15,7 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class JsonFormatterStringTest {
+public class LocaleFormatterStringTest {
     private Map<String, Object> values = new HashMap<>();
     private LocalTime time = LocalTime.of(12,30,15,200 * 1000000);
     private LocalDate date = LocalDate.of(2020, 10, 29);
@@ -28,7 +27,7 @@ public class JsonFormatterStringTest {
     @Test
     public void givenFormatString__giveString__thenGetString() throws Exception {
         String s = "{a:s}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
+        LocaleFormatter formatter = new LocaleFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", "plok");
         assertThat(formatter.format(values), is("plok"));
     }
@@ -36,7 +35,7 @@ public class JsonFormatterStringTest {
     @Test
     public void givenFormatString__giveInt__thenGetError() throws Exception {
         String s = "{a:s}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
+        LocaleFormatter formatter = new LocaleFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", 16);
         thrown.expect(FormatterException.class);
         assertThat(formatter.format(values), is("16"));
@@ -45,7 +44,7 @@ public class JsonFormatterStringTest {
     @Test
     public void givenFormatString__giveFloat__thenGetError() throws Exception {
         String s = "{a:s}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
+        LocaleFormatter formatter = new LocaleFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", 1.6F);
         thrown.expect(FormatterException.class);
         formatter.format(values);
@@ -54,7 +53,7 @@ public class JsonFormatterStringTest {
     @Test
     public void givenFormatString__giveDateTime__thenGetError() throws Exception {
         String s = "{a:s}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
+        LocaleFormatter formatter = new LocaleFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", dateTime);
         thrown.expect(FormatterException.class);
         formatter.format(values);
@@ -63,7 +62,7 @@ public class JsonFormatterStringTest {
     @Test
     public void givenFormatString__giveDate__thenGetError() throws Exception {
         String s = "{a:s}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
+        LocaleFormatter formatter = new LocaleFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", date);
         thrown.expect(FormatterException.class);
         formatter.format(values);
@@ -72,7 +71,7 @@ public class JsonFormatterStringTest {
     @Test
     public void givenFormatString__giveTime__thenGetError() throws Exception {
         String s = "{a:s}";
-        JsonFormatter formatter = new JsonFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
+        LocaleFormatter formatter = new LocaleFormatter(s, Locale.FRANCE, ZoneOffset.UTC);
         this.values.put("a", time);
         thrown.expect(FormatterException.class);
         formatter.format(values);

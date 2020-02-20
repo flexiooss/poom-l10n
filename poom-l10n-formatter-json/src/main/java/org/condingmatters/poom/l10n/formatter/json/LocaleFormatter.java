@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JsonFormatter {
+public class LocaleFormatter {
     private String sentence;
     private Map<String, Object> values;
     private Locale locale;
@@ -19,7 +19,7 @@ public class JsonFormatter {
     private final String regex = "\\{\\w+:\\w+\\}";
     final Pattern pattern = Pattern.compile(regex);
 
-    public JsonFormatter(String sentence, Locale locale, ZoneOffset offset) {
+    public LocaleFormatter(String sentence, Locale locale, ZoneOffset offset) {
         this.sentence = sentence;
         this.locale = locale;
         this.offset = offset;

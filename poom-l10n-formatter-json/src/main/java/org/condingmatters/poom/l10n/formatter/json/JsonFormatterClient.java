@@ -4,9 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Map;
 
-public class JsonFormatterClient {
+public class JsonFormatterClient implements BundleClient {
     private Map<String, Map<String, String>> localizations;
 
     public JsonFormatterClient(String path) throws IOException {
@@ -17,17 +18,18 @@ public class JsonFormatterClient {
         this.localizations = objectMapper.readValue(resource, Map.class);
     }
 
-    public String get(String locale, String key) {
-        if (locale.isEmpty()) {
+    public String get(Locale locale, String key) {
+        if (locale == null) {
             this.localizations.get(0).get(key);
         }
-        String lang = locale.substring(0, 2);
-        if (!this.localizations.containsKey(locale)) {
+        String lang = locale.getLanguage();
+        String variant = locale.toLanguageTag();
+        if (!this.localizations.containsKey(variant)) {
             if (this.localizations.containsKey(lang)) {
                 return this.localizations.get(lang).get(key);
             }
         }
 
-        return this.localizations.get(locale).get(key);
+        return this.localizations.get(variant).get(key);
     }
 }
