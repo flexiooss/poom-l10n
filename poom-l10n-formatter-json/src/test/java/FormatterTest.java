@@ -1,4 +1,5 @@
 import org.condingmatters.poom.l10n.formatter.json.Formatter;
+import org.condingmatters.poom.l10n.formatter.json.FormatterValues;
 import org.condingmatters.poom.l10n.formatter.json.JsonFormatterClient;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +23,14 @@ public class FormatterTest {
     @Before
     public void setUp() throws Exception {
         this.formatter = new Formatter().withBundle(new File("spec/Localizations.json"), idBundle);
+    }
+
+    @Test
+    public void testEmpty() throws Exception {
+        Formatter formatter = this.formatter.at(Locale.FRANCE, ZoneOffset.UTC);
+        String result = formatter.format(idBundle, "not exist").here();
+
+        assertThat(result, is("not exist"));
     }
 
     @Test

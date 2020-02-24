@@ -21,16 +21,30 @@ public class JsonFormatterClient implements BundleClient {
 
     public String get(Locale locale, String key) {
         if (locale == null) {
-            this.localizations.get(0).get(key);
+            return key;
         }
         String lang = locale.getLanguage();
         String variant = locale.toLanguageTag();
-        if (!this.localizations.containsKey(variant)) {
-            if (this.localizations.containsKey(lang)) {
-                return this.localizations.get(lang).get(key);
+
+        if (this.localizations.containsKey(variant)) {
+            return this.getKey(variant, key);
+        } else {
+            if (this.localizations.containsKey(lang)){
+                return this.getKey(lang, key);
+            }else {
+                return key;
             }
         }
 
-        return this.localizations.get(variant).get(key);
+
+    }
+
+    String getKey(String lang, String key) {
+        String line = this.localizations.get(lang).get(key);
+        if (line == null) {
+            return key;
+        } else {
+            return line;
+        }
     }
 }
