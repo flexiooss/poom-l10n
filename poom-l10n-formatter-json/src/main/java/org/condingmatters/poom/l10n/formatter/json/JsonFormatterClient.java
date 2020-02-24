@@ -35,11 +35,9 @@ public class JsonFormatterClient implements BundleClient {
                 return key;
             }
         }
-
-
     }
 
-    String getKey(String lang, String key) {
+    private String getKey(String lang, String key) {
         String line = this.localizations.get(lang).get(key);
         if (line == null) {
             return key;

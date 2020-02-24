@@ -1,5 +1,4 @@
 import org.condingmatters.poom.l10n.formatter.json.Formatter;
-import org.condingmatters.poom.l10n.formatter.json.FormatterValues;
 import org.condingmatters.poom.l10n.formatter.json.JsonFormatterClient;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,7 @@ public class FormatterTest {
 
     @Before
     public void setUp() throws Exception {
-        this.formatter = new Formatter().withBundle(new File("spec/Localizations.json"), idBundle);
+        this.formatter = new Formatter().withBundle(idBundle, new File("spec/Localizations.json"));
     }
 
     @Test

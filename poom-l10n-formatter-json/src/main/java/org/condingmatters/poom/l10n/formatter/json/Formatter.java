@@ -16,7 +16,7 @@ public class Formatter {
         this.bundles = new HashMap<>();
     }
 
-    public Formatter withBundle(File jsonFile, String idBundle) throws IOException, FormatterException{
+    public Formatter withBundle(String idBundle, File jsonFile) throws IOException, FormatterException{
         if (this.bundles.containsKey(idBundle)) {
             throw new FormatterException("Bundle " + idBundle + " already present");
         }
@@ -24,7 +24,7 @@ public class Formatter {
         return this;
     }
 
-    public Formatter withBundle(String bundle, String idBundle) throws IOException, FormatterException {
+    public Formatter withBundle(String idBundle, String bundle) throws IOException, FormatterException {
         if (this.bundles.containsKey(idBundle)) {
             throw new FormatterException("Bundle " + idBundle + " already present");
         }
