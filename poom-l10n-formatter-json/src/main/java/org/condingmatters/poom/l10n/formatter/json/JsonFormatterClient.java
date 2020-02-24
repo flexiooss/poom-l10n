@@ -2,6 +2,7 @@ package org.condingmatters.poom.l10n.formatter.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
@@ -10,11 +11,11 @@ import java.util.Map;
 public class JsonFormatterClient implements BundleClient {
     private Map<String, Map<String, String>> localizations;
 
-    public JsonFormatterClient(String path) throws IOException {
+    public JsonFormatterClient(File path) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-        URL resource = contextClassLoader.getResource(path);
+        URL resource = contextClassLoader.getResource(path.getPath());
         this.localizations = objectMapper.readValue(resource, Map.class);
     }
 

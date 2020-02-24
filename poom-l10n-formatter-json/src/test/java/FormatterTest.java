@@ -3,6 +3,7 @@ import org.condingmatters.poom.l10n.formatter.json.JsonFormatterClient;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -20,7 +21,7 @@ public class FormatterTest {
 
     @Before
     public void setUp() throws Exception {
-        this.formatter = new Formatter().withBundle(idBundle, "spec/Localizations.json");
+        this.formatter = new Formatter().withBundle(new File("spec/Localizations.json"), idBundle);
     }
 
     @Test

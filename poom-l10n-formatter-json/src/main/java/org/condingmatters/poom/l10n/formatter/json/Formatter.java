@@ -1,5 +1,6 @@
 package org.condingmatters.poom.l10n.formatter.json;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.ZoneOffset;
 import java.util.HashMap;
@@ -15,11 +16,18 @@ public class Formatter {
         this.bundles = new HashMap<>();
     }
 
-    public Formatter withBundle(String idBundle, String bundle) throws IOException, FormatterException {
+    public Formatter withBundle(File jsonFile, String idBundle) throws IOException, FormatterException{
         if (this.bundles.containsKey(idBundle)) {
             throw new FormatterException("Bundle " + idBundle + " already present");
         }
-        this.bundles.put(idBundle, new JsonFormatterClient(bundle));
+        this.bundles.put(idBundle, new JsonFormatterClient(jsonFile));
+        return this;
+    }
+
+    public Formatter withBundle(String bundle, String idBundle) throws IOException, FormatterException {
+        if (this.bundles.containsKey(idBundle)) {
+            throw new FormatterException("Bundle " + idBundle + " already present");
+        }
         return this;
     }
 
